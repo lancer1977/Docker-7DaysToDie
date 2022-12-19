@@ -14,6 +14,7 @@ LABEL build_version="version: 0.2.9"
 RUN dpkg --add-architecture i386 && \
 	apt update -y && \
 	apt install -y --no-install-recommends \
+		mono-runtime\
 		nano \
 		iproute2 \
 		curl \
