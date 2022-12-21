@@ -1,4 +1,4 @@
-FROM steamcmd/steamcmd:ubuntu-18
+FROM ubuntu:22.04
 
 STOPSIGNAL SIGTERM
 
@@ -6,15 +6,18 @@ STOPSIGNAL SIGTERM
 
 ####Labels####
 LABEL maintainer="vinanrra"
-LABEL build_version="version: 0.2.9"
+LABEL build_version="version: 0.3.0"
 
 #####Dependencies####
+RUN apt update && apt upgrade
+RUN apt install -y --no-install-recommends  software-properties-common
+RUN add-apt-repository multiverse
 
 # LinuxGSM dependencies
 RUN dpkg --add-architecture i386 && \
 	apt update -y && \
 	apt install -y --no-install-recommends \
-		mono-runtime\
+		mono-runtime \
 		nano \
 		iproute2 \
 		curl \
@@ -31,7 +34,6 @@ RUN dpkg --add-architecture i386 && \
 		bc \
 		jq \
 		tmux \
-		lib32gcc1 \
 		lib32stdc++6 \
 		libstdc++6 \
 		libstdc++6:i386 \
@@ -43,10 +45,22 @@ RUN dpkg --add-architecture i386 && \
 		cron \
 		tclsh \
 		cpio \
-		libsdl2-2.0-0:i386 \
 		xz-utils \
-		distro-info
+		distro-info \
+		lib32gcc-s1 \ 
+		cmake \ 
+		wget
 
+
+RUN wget https://github.com/libsdl-org/SDL/releases/download/release-2.26.1/SDL2-2.26.1.tar.gz
+RUN tar -zxf SDL2-2.26.1.tar.gz
+RUN cd SDL2-2.26.1
+RUN cmake -S . -B build && cmake --build build && cmake --install build
+
+RUN echo steam steam/question select "I AGREE" | debconf-set-selections
+RUN echo steam steam/license note '' | debconf-set-selections
+RUN apt install -y --no-install-recommends 	steamcmd
+RUN ln -s /usr/games/steamcmd steamcmd
 # Install gamedig
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - ; \
 	apt install -y nodejs && npm install -g gamedig
