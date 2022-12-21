@@ -17,6 +17,7 @@ RUN add-apt-repository multiverse
 RUN dpkg --add-architecture i386 && \
 	apt update -y && \
 	apt install -y --no-install-recommends \
+		make \ 
 		mono-runtime \
 		nano \
 		iproute2 \
@@ -50,12 +51,16 @@ RUN dpkg --add-architecture i386 && \
 		lib32gcc-s1 \ 
 		cmake \ 
 		wget
+RUN apt install gcc -y
 
-
-RUN wget https://github.com/libsdl-org/SDL/releases/download/release-2.26.1/SDL2-2.26.1.tar.gz
-RUN tar -zxf SDL2-2.26.1.tar.gz
-RUN cd SDL2-2.26.1
-RUN cmake -S . -B build && cmake --build build && cmake --install build
+RUN wget https://github.com/libsdl-org/SDL/releases/download/release-2.26.1/SDL2-2.26.1.tar.gz; \
+	tar -zxf SDL2-2.26.1.tar.gz; \
+	cd SDL2-2.26.1; \ 
+	mkdir build; \
+	cd build; \
+	../configure; \
+	make; \
+	make install
 
 RUN echo steam steam/question select "I AGREE" | debconf-set-selections
 RUN echo steam steam/license note '' | debconf-set-selections
