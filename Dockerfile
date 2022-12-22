@@ -43,6 +43,7 @@ RUN dpkg --add-architecture i386 && \
 		tclsh \
 		cpio \
 		xz-utils \
+		libsdl2-2.0-0:i386 \
 		distro-info
 
 # Install gamedig
