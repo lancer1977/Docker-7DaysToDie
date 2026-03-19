@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM steamcmd/steamcmd:ubuntu-18
 
 STOPSIGNAL SIGTERM
 
@@ -6,19 +6,14 @@ STOPSIGNAL SIGTERM
 
 ####Labels####
 LABEL maintainer="vinanrra"
-LABEL build_version="version: 0.3.0"
+LABEL build_version="version: 0.3.1"
 
 #####Dependencies####
-RUN apt update && apt upgrade -y
-RUN apt install -y --no-install-recommends  software-properties-common
-RUN add-apt-repository multiverse
 
 # LinuxGSM dependencies
 RUN dpkg --add-architecture i386 && \
 	apt update -y && \
 	apt install -y --no-install-recommends \
-		make \ 
-		mono-runtime \
 		nano \
 		iproute2 \
 		curl \
@@ -35,6 +30,7 @@ RUN dpkg --add-architecture i386 && \
 		bc \
 		jq \
 		tmux \
+		lib32gcc1 \
 		lib32stdc++6 \
 		libstdc++6 \
 		libstdc++6:i386 \
@@ -47,40 +43,42 @@ RUN dpkg --add-architecture i386 && \
 		tclsh \
 		cpio \
 		xz-utils \
-		distro-info \
-		lib32gcc-s1 \ 
-		cmake \ 
-		wget \
-		libc6-dev \
-		gcc
+		libsdl2-2.0-0:i386 \
+		distro-info
 
-RUN wget https://github.com/libsdl-org/SDL/releases/download/release-2.26.1/SDL2-2.26.1.tar.gz; \
-	tar -zxf SDL2-2.26.1.tar.gz; \
-	cd SDL2-2.26.1; \ 
-	mkdir build; \
-	cd build; \
-	../configure; \
-	make; \
-	make install
-
-RUN echo steam steam/question select "I AGREE" | debconf-set-selections
-RUN echo steam steam/license note '' | debconf-set-selections
-RUN apt install -y --no-install-recommends 	steamcmd
-RUN ln -s /usr/games/steamcmd steamcmd
 # Install gamedig
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - ; \
 	apt install -y nodejs && npm install -g gamedig
 
+# Install SDL
+RUN 
+
 # Install latest su-exec
 RUN  set -ex; \
-	curl -o /usr/local/bin/su-exec.c https://raw.githubusercontent.com/ncopa/su-exec/master/su-exec.c; \
-	fetch_deps='gcc libc-dev'; \
-	apt-get install -y --no-install-recommends $fetch_deps; \
-	gcc -Wall /usr/local/bin/su-exec.c -o/usr/local/bin/su-exec; \
-	chown root:root /usr/local/bin/su-exec; \
-	chmod 0755 /usr/local/bin/su-exec; \
-	rm /usr/local/bin/su-exec.c; \
-	apt-get purge -y --auto-remove $fetch_deps
+		\
+		curl -o /usr/local/bin/su-exec.c https://raw.githubusercontent.com/ncopa/su-exec/master/su-exec.c; \
+		\
+		fetch_deps='gcc libc-dev libc6-dev make'; \
+		apt-get install -y --no-install-recommends $fetch_deps; \
+		gcc -Wall \
+				/usr/local/bin/su-exec.c -o/usr/local/bin/su-exec; \
+		chown root:root /usr/local/bin/su-exec; \
+		chmod 0755 /usr/local/bin/su-exec; \
+		rm /usr/local/bin/su-exec.c; \
+		wget https://github.com/libsdl-org/SDL/releases/download/release-2.26.1/SDL2-2.26.1.tar.gz; \
+		tar -zxf SDL2-2.26.1.tar.gz; \
+		cd SDL2-2.26.1; \ 
+		mkdir build; \
+		cd build; \
+		../configure; \
+		make; \
+		make install; \
+		cd ../..; rm -r SDL2-2.26.1; \
+		rm SDL2-2.26.1.tar.gz; \
+		apt-get purge -y --auto-remove $fetch_deps
+
+
+
 
 # Clear unused files
 RUN apt clean && \
