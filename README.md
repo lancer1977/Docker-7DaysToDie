@@ -46,13 +46,15 @@
 
 ## Documentation
 
+- [Docs README](./docs/README.md)
 - [Usage](docs/usage.md)
 - [Parameters](docs/parameters.md)
 - [Updating Info](docs/updating_info.md)
 - [Support Info](docs/support.md)
 - [Feature Index](./docs/features/README.md)
 - [Core Capabilities](./docs/features/core-capabilities.md)
-- [Roadmap](./docs/roadmaps/portfolio-roadmap.md)
+- [Roadmap Index](./docs/roadmaps/README.md)
+- [Portfolio Roadmap](./docs/roadmaps/portfolio-roadmap.md)
 
 ## Donations
 
