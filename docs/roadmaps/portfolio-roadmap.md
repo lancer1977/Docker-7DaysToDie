@@ -26,6 +26,17 @@ This repo follows the shared `Api.GameServerInterop` ladder. `V0` is the infra f
 - Tests indexed: no
 - Boundary: deploy/runtime lane for 7 Days to Die, not the shared interop package.
 
+## Shared phase model
+
+This roadmap follows the shared `PolyhydraGames.GameServerInterop` phase ladder as a reference point:
+
+- `V1` - deployment stability and reproducible packaging
+- `V2` - confidence, compatibility, and docs/runbook hardening
+- `V3` - sidecar or bridge baseline, if the repo ever adds one
+- `V4` - downstream integration, if the repo ever adds one
+
+The current repo only needs the V1 deployment baseline today.
+
 ## Discovery
 - [x] Capture and timestamp recent change signal
 - [x] Capture top-level area concentration
@@ -45,7 +56,7 @@ This repo follows the shared `Api.GameServerInterop` ladder. `V0` is the infra f
 - [ ] Expand runbooks for recurring operator or publishing workflows
 - [ ] Standardize naming and checklist structure for future items
 
-## V10 (scale)
+## V4 (scale)
 - [ ] Move to a stable platform pattern with cross-repo checklist templates
 - [ ] Split roadmap into discrete feature-level and initiative-level folders
 - [ ] Define long-range acceptance criteria with operational and product owners

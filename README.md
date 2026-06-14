@@ -9,7 +9,7 @@
 - ui
 - server
 
-# 7 Days To Die server using LinuxGSM in Docker with backups, monitor, auto-installable mods and more
+# 7 Days To Die server using LinuxGSM in Docker with backups, monitoring, auto-installable mods, and more
 
 ## Per-Repo Fill-In
 
@@ -39,27 +39,44 @@ See [Docs](docs/README.md) for the local navigation entrypoint and [Portfolio ro
 
 ![7DaysToDie](7dtd.png)
 
-## Features
+## What this repo provides
 
-* **Multi-version** you can choose which version you want to play, [more info](docs/parameters.md#7-days-to-die).
-* **Auto-installable mods**, [more info](docs/mods_support.md#mods) also check [Mods parameters](docs/parameters.md#mods).
-* **Automatic Backups**, [more info](docs/backups.md) also check [LinuxGSM parameters](docs/parameters.md#linuxgsm)
-* **Monitor** if server crashes it will be restarted, [more info](docs/parameters.md#linuxgsm).
-* **Alerts** if server requires your attention, [more info](docs/alerts.md#alerts) also check [LinuxGSM parameters](docs/parameters.md#linuxgsm).
-* **User/Group Identifiers**, [more info](docs/user_groups_identifiers.md).
+- LinuxGSM-based dedicated server container image
+- Docker Compose deployment examples
+- backup, monitoring, and alerting guidance
+- optional mod-install and user/group configuration
+- feature and parameter documentation for the runtime image
+
+## V1 baseline
+
+- The image build and Compose usage are documented and stable.
+- The deployment docs cover the current supported runtime shape.
+- V1 means the container can be started, configured, and maintained without guessing.
 
 ## Information
 
-* If you want to change any server settings, edit `/path/to/ServerFiles/sdtdserver.xml`
-* Read EVERYTHING to avoid any errors, if you have any problems open a [github ticket](https://github.com/vinanrra/Docker-7DaysToDie/issues).
+- If you want to change any server settings, edit `/path/to/ServerFiles/sdtdserver.xml`.
+- Read the docs before changing the deployment shape.
+- If you have a problem with the image or docs, open a GitHub issue in the upstream project.
 
-## [Usage](docs/usage.md)
+## Getting started
 
-## [Parameters](docs/parameters.md)
+1. Review the usage and parameter docs.
+2. Decide whether you want raw `docker run` or Compose.
+3. Configure the server files, mods, and volume paths.
+4. Start the container and verify the logs and backup path.
 
-## [Updating Info](docs/updating_info.md)
+## Documentation
 
-## [Support Info](docs/support.md)
+- [Docs README](./docs/README.md)
+- [Usage](docs/usage.md)
+- [Parameters](docs/parameters.md)
+- [Updating Info](docs/updating_info.md)
+- [Support Info](docs/support.md)
+- [Feature Index](./docs/features/README.md)
+- [Core Capabilities](./docs/features/core-capabilities.md)
+- [Roadmap Index](./docs/roadmaps/README.md)
+- [Portfolio Roadmap](./docs/roadmaps/portfolio-roadmap.md)
 
 ## Donations
 
