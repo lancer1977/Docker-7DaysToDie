@@ -1,5 +1,7 @@
 # Docker-7DaysToDie portfolio roadmap
 
+Use this roadmap for the runtime lane only. The paired support home is `../7Days-Support`.
+
 ## Shared infra ladder
 
 This repo follows the shared `Api.GameServerInterop` ladder. `V0` is the infra floor and `V1` points back to `../7Days-Support` as the support-home boundary.

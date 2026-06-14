@@ -4,6 +4,8 @@ Canonical docs entrypoint for the 7 Days to Die Docker runtime lane.
 
 This folder covers the deployable/analyzable infra layer: the bootable server wrapper, sidecar/readback boundary, deployment lane, and smoke-test expectations for `V0`. The canonical support home lives in `../7Days-Support`, and `V1` keeps this repo on the runtime/deploy lane.
 
+Start here for routing, then use the repository README for the compact runtime-lane summary.
+
 ## Per-Repo Fill-In
 
 - Repo: `Docker-7DaysToDie`

@@ -1,5 +1,9 @@
 # [vinanrra/7dtd-server](https://github.com/vinanrra/Docker-7DaysToDie)
 
+Runtime lane for the 7 Days to Die containerized server.
+
+First read: [docs/README.md](./docs/README.md).
+
 ## Tags
 
 - docker
