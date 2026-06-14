@@ -13,6 +13,8 @@ tags: [documentation, Docker-7DaysToDie]
 
 This directory documents all features and roadmap items. All state is now tracked in front matter.
 
+The repo boundary is the Docker runtime lane. Keep the `V0` infra baseline explicit: bootable server or wrapper, support-sidecar/readback, deployment lane, and smoke tests, with shared contracts in `Api.GameServerInterop`. `V1` stays anchored in `../7Days-Support`.
+
 ## Core Features (Existing Functionality)
 
 - [**Multi-version** you can choose which version you want to play, [more info](docs/parameters.md#7-days-to-die).](./multi-version-you-can-choose-which-version-you-want-to-play-more-info-docs-parameters-md-7-days-to-die.md)
@@ -25,4 +27,4 @@ This directory documents all features and roadmap items. All state is now tracke
 
 ## Beyond the App
 
-- Shared utilities and local development tools.
+- Shared utilities, local development tools, and the deployment/runtime lane for the 7 Days server.

@@ -1,5 +1,16 @@
 # Docker-7DaysToDie portfolio roadmap
 
+## Shared infra ladder
+
+This repo follows the shared `Api.GameServerInterop` ladder. `V0` is the infra floor and `V1` points back to `../7Days-Support` as the support-home boundary.
+
+- `V0`: bootable server or wrapper, support-sidecar/readback, deployment lane, and smoke tests.
+- `V1`: canonical support home lives in `../7Days-Support`; this repo remains the runtime/deploy lane.
+- `V2`: read-only support proof.
+- `V3`: capability and control truth.
+- `V4`: public/operator projection.
+- `V5`: approval-gated gameplay proof.
+
 ## 90-day evidence snapshot
 - Commits (90 days): 5
 - Files changed (90 days): 19
@@ -13,6 +24,7 @@
 - Roadmap folder: no
 - Features docs: yes
 - Tests indexed: no
+- Boundary: deploy/runtime lane for 7 Days to Die, not the shared interop package.
 
 ## Discovery
 - [x] Capture and timestamp recent change signal
@@ -24,6 +36,9 @@
 - [ ] Close gaps in docs and feature notes for recently touched areas
 - [ ] Add or update smoke checks for changed source paths
 - [ ] Validate packaging and deploy assumptions where infra/config changed
+
+## V0 note
+- [ ] Keep the bootable runtime, sidecar/readback boundary, and deployment lane explicit in the docs whenever the image or wrapper changes.
 
 ## V2 (confidence)
 - [ ] Add deeper tests on highest-churn areas
