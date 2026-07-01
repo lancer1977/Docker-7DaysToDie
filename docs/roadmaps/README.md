@@ -1,12 +1,6 @@
-# Docker-7DaysToDie Roadmaps
+# Docker-7DaysToDie: Docker-7DaysToDie Roadmaps
 
-Canonical roadmap entrypoint for the 7 Days to Die Docker image.
+This local planning file has been migrated. GitHub Issues are the canonical tracker.
 
-## Current Roadmap
-
-- [Portfolio Roadmap](./portfolio-roadmap.md)
-
-## Notes
-
-- Keep active roadmap language focused on the current deployment baseline.
-- Use historical notes only when referencing older planning labels.
+Canonical GitHub issue: https://github.com/lancer1977/dev-forge/issues/574
+Original source kind: roadmap

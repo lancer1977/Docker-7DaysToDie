@@ -17,6 +17,7 @@ The repo boundary is the Docker runtime lane. Keep the `V0` infra baseline expli
 
 ## Core Features (Existing Functionality)
 
+- [Version Coverage Map](./version-coverage-map.md)
 - [**Multi-version** you can choose which version you want to play, [more info](../parameters.md#7-days-to-die).](./multi-version-you-can-choose-which-version-you-want-to-play-more-info-docs-parameters-md-7-days-to-die.md)
 - [**Auto-installable mods**, [more info](../mods_support.md#mods) also check [Mods parameters](../parameters.md#mods).](./auto-installable-mods-more-info-docs-mods-support-md-mods-also-check-mods-parameters-docs-parameters-md-mods.md)
 - [**Automatic Backups**, [more info](../backups.md) also check [LinuxGSM parameters](../parameters.md#linuxgsm)](./automatic-backups-more-info-docs-backups-md-also-check-linuxgsm-parameters-docs-parameters-md-linuxgsm.md)

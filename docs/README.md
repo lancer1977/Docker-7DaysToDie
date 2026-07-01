@@ -21,6 +21,7 @@ Start here for routing, then use the repository README for the compact runtime-l
 
 - [Repository README](../README.md)
 - [Feature Index](./features/README.md)
+- [Version Coverage Map](./features/version-coverage-map.md)
 - [Portfolio roadmap](./roadmaps/portfolio-roadmap.md)
 - [252 operator matrix](../../gitops/docs/roadmaps/game-server-252-operator-matrix.md)
 

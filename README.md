@@ -78,6 +78,7 @@ See [Docs](docs/README.md) for the local navigation entrypoint and [Portfolio ro
 - [Updating Info](docs/updating_info.md)
 - [Support Info](docs/support.md)
 - [Feature Index](./docs/features/README.md)
+- [Version Coverage Map](./docs/features/version-coverage-map.md)
 - [Core Capabilities](./docs/features/core-capabilities.md)
 - [Roadmap Index](./docs/roadmaps/README.md)
 - [Portfolio Roadmap](./docs/roadmaps/portfolio-roadmap.md)
@@ -101,5 +102,6 @@ See [Docs](docs/README.md) for the local navigation entrypoint and [Portfolio ro
 Detailed documentation can be found in the following sections:
 - [Docs README](./docs/README.md)
 - [Feature Index](./docs/features/README.md)
+- [Version Coverage Map](./docs/features/version-coverage-map.md)
 - [Core Capabilities](./docs/features/core-capabilities.md)
 - [252 operator matrix](../gitops/docs/roadmaps/game-server-252-operator-matrix.md)
