@@ -20,7 +20,7 @@ First read: [docs/README.md](./docs/README.md).
 - Repo: `Docker-7DaysToDie`
 - Sibling: `../7Days-Support`
 - Boundary: runtime-only deploy lane; keep support/home content in the sibling and shared contracts in `Api.GameServerInterop`
-- Build/Smoke: `docker build -t vinanrra/7dtd-server . && bash scripts/check_script.sh && bash scripts/check_startMode.sh`
+- Build/Smoke: `bash scripts/validate.sh && bash scripts/smoke_runtime_contract.sh && docker build -t vinanrra/7dtd-server .`
 - Caveats: keep this repo focused on runtime/deploy behavior and do not move support-home ownership here
 
 ## 252 Deployment Status
@@ -49,6 +49,7 @@ See [Docs](docs/README.md) for the local navigation entrypoint and [Portfolio ro
 - Docker Compose deployment examples
 - backup, monitoring, and alerting guidance
 - optional mod-install and user/group configuration
+- source-level runtime contract smoke for entrypoint and start-mode routing
 - feature and parameter documentation for the runtime image
 
 ## V1 baseline

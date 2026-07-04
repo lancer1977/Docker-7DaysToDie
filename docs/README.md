@@ -29,3 +29,5 @@ Start here for routing, then use the repository README for the compact runtime-l
 
 - Keep shared telemetry, health, capability, and adapter contracts in `Api.GameServerInterop`.
 - Keep runtime/deployment details here and in the feature or roadmap docs, not in the shared interop package.
+- Use `bash scripts/smoke_runtime_contract.sh` for the fast source-level runtime
+  contract smoke before attempting a full image build or live server boot.
