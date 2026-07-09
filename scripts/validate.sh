@@ -18,6 +18,7 @@ required_paths=(
   "deploy/portainer-stack.yml"
   "scripts/check_script.sh"
   "scripts/check_startMode.sh"
+  "scripts/smoke_runtime_contract.sh"
   "scripts/server_start.sh"
   "scripts/server_update.sh"
 )
@@ -40,6 +41,7 @@ grep -q "START_MODE" Dockerfile scripts/check_startMode.sh
 bash -n install.sh
 bash -n user.sh
 find scripts -type f -name "*.sh" -print0 | xargs -0 -n1 bash -n
+bash scripts/smoke_runtime_contract.sh
 
 docker compose -f deploy/docker-compose.local.yml config --quiet
 docker compose -f deploy/nginx/docker-compose.local.yml config --quiet

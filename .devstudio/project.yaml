@@ -1,12 +1,38 @@
-name: change-me
-repo_root: change-me
+schema: 1
+project:
+  name: Docker-7DaysToDie
+  kind: docker-service
+  owner: lancer1977
+  languages:
+    - shell
+    - dockerfile
+  frameworks:
+    - docker
+    - linuxgsm
 
-languages: []
-frameworks: []
+validation:
+  validate: bash scripts/validate.sh
+  scope:
+    - Required runtime docs, Dockerfiles, shell scripts, and deployment examples are present.
+    - Shell scripts pass `bash -n`.
+    - Docker Compose examples render with `docker compose config --quiet`.
 
 ci:
-  build: []
-  test: []
+  build:
+    - docker build -t vinanrra/7dtd-server .
+  test:
+    - bash scripts/validate.sh
+
+tracking:
+  primary: local-00-agile
+  dev-studio: DEV_STUDIO.md
+
+docs:
+  index: docs/README.md
+  parameters: docs/parameters.md
+  usage: docs/usage.md
+  support: docs/support.md
+  roadmap: docs/roadmaps/README.md
 
 devstudio:
   runtime_model: three-agent

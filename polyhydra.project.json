@@ -1,0 +1,15 @@
+{
+  "lastUpdated": "2026-07-06",
+  "name": "Docker-7DaysToDie",
+  "repoLabel": "lancer1977/Docker-7DaysToDie",
+  "schemaVersion": 1,
+  "slug": "docker-7daystodie",
+  "status": "active",
+  "summary": "Runtime lane for the 7 Days to Die containerized server.",
+  "tags": [
+    "game-support",
+    "shell",
+    "docs",
+    "docker"
+  ]
+}

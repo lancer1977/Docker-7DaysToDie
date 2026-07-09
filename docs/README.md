@@ -6,6 +6,22 @@ This folder covers the deployable/analyzable infra layer: the bootable server wr
 
 Start here for routing, then use the repository README for the compact runtime-lane summary.
 
+## Runtime-Lane Scope
+
+- Boot proof: build the LinuxGSM-based image or run the source-level runtime
+  contract smoke before a live server boot.
+- Lifecycle proof: start, restart, stop, update, and observe the 7 Days runtime
+  container without moving support-home policy into this image repo.
+- Config proof: validate `START_MODE`, server file mounts, LGSM config mounts,
+  ports, mods, backup settings, and runtime scripts.
+- Logs proof: use `docker logs -f 7dtdserver` and LinuxGSM log paths as the
+  runtime readback lane.
+- Readback proof: keep this repo limited to container/server process state,
+  ports, logs, backups, and file-backed runtime configuration evidence.
+- Delegation: V2-V5 support-sidecar contracts, public/operator policy,
+  approval, audit, rollback, and gameplay mutation belong in `../7Days-Support`,
+  API/support packages, and shared interop packages.
+
 ## Per-Repo Fill-In
 
 - Repo: `Docker-7DaysToDie`
@@ -29,3 +45,5 @@ Start here for routing, then use the repository README for the compact runtime-l
 
 - Keep shared telemetry, health, capability, and adapter contracts in `Api.GameServerInterop`.
 - Keep runtime/deployment details here and in the feature or roadmap docs, not in the shared interop package.
+- Use `bash scripts/smoke_runtime_contract.sh` for the fast source-level runtime
+  contract smoke before attempting a full image build or live server boot.

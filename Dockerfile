@@ -122,7 +122,7 @@ COPY --chmod=755 scripts/ /home/sdtdserver/scripts
 
 ##############EXTRA CONFIG##############
 #Ports
-EXPOSE 26900 26900/UDP 26901/UDP 26902/UDP 8082 8081 8080
+EXPOSE 26900 26900/udp 26901/udp 26902/udp 8082 8081 8080
 
 #Shared folders to host
 VOLUME /home/sdtdserver/serverfiles/ /home/sdtdserver/.local/share/7DaysToDie /home/sdtdserver/log/ /home/sdtdserver/lgsm/backup/ /home/sdtdserver/lgsm/config-lgsm/sdtdserver/
