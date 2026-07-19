@@ -10,6 +10,10 @@ on:
     # Only following types are handled by the action, but one can default to all as well
     types: [opened, reopened, synchronize]
 
+concurrency:
+  group: docker-7daystodie-release-drafter-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   update_release_draft:
     runs-on: ubuntu-latest
