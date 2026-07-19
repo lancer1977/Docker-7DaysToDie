@@ -11,7 +11,7 @@ on:
 concurrency:
   group: docker-7daystodie-test-publish-${{ github.ref }}
   cancel-in-progress: false
-  
+
 jobs:
   docker:
     runs-on: ubuntu-latest
