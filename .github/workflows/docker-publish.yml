@@ -26,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      packages: write
 
     steps:
       - name: Check out repository
@@ -37,18 +38,21 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Login to Docker Hub
+      # GHCR with the Actions-builtin GITHUB_TOKEN — no secret needs to be
+      # provisioned in this repository.
+      - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: |
-            lancer1977/7dtd-server
+            ghcr.io/lancer1977/7dtd-server
           # `latest` from the deploy branch is what the Alienware
           # `7days-fresh` stack pulls. The release tag is additive and only
           # appears when the run was triggered by a published release — the
