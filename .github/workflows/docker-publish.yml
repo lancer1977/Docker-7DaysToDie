@@ -1,50 +1,93 @@
 name: Release - Docker Image CI
 
+# This workflow had never run once before this change, for two compounding
+# reasons:
+#   1. It only triggered on `release: published`, and this fork has no
+#      published release (only an untagged draft). The `branches:` key under
+#      `release:` was also inert — release events are not branch-filtered.
+#   2. It pushed to `vinanrra/7dtd-server`, the upstream author's namespace,
+#      which this fork cannot write to.
+# It now also builds on pushes to the deploy branch, so `latest` — the tag
+# homelab-gitops actually deploys — gets produced.
 on:
+  push:
+    branches: [master]
   release:
-    branches: [ master ]
-    types: [ published ]
-  
-  # Allows you to run this workflow manually from the Actions tab
+    types: [published]
   workflow_dispatch:
+
+concurrency:
+  group: 7dtd-docker-publish-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   docker:
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - uses: actions/checkout@v1
-      - name: "call action"
-        id: last_release
-        uses: InsonusK/get-latest-release@v1.0.1
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # GHCR with the Actions-builtin GITHUB_TOKEN — no secret needs to be
+      # provisioned in this repository.
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
-          myToken: ${{ github.token }}
-          exclude_types: "draft|prerelease"
-          view_top: 1
-#      - name: "Print result"
-#        run: |
-#          echo "id: ${{ steps.last_release.outputs.id }}"
-#          echo "name: ${{ steps.last_release.outputs.name }}"
-#          echo "tag_name: ${{ steps.last_release.outputs.tag_name }}"
-#          echo "created_at: ${{ steps.last_release.outputs.created_atd }}"
-#          echo "draft: ${{ steps.last_release.outputs.draft }}"
-#          echo "prerelease: ${{ steps.last_release.outputs.prerelease }}"
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      -
-        name: Login to DockerHub
-        uses: docker/login-action@v1 
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          push: true
+          images: |
+            ghcr.io/lancer1977/7dtd-server
+          # `latest` from the deploy branch is what the Alienware
+          # `7days-fresh` stack pulls. The release tag is additive and only
+          # appears when the run was triggered by a published release — the
+          # old workflow assumed a release tag always existed, and this fork
+          # has no tags at all.
           tags: |
-            vinanrra/7dtd-server:latest,vinanrra/7dtd-server:${{ steps.last_release.outputs.tag_name }}
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/master' }}
+            type=ref,event=tag
+            type=sha
+          labels: |
+            org.opencontainers.image.title=7dtd-server
+            org.opencontainers.image.description=7 Days to Die Dedicated Server
+            org.opencontainers.image.url=https://github.com/lancer1977/Docker-7DaysToDie
+            org.opencontainers.image.source=https://github.com/lancer1977/Docker-7DaysToDie
+            org.opencontainers.image.version=${{ github.sha }}
+            org.opencontainers.image.revision=${{ github.sha }}
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v6
+        with:
+          # build-push-action defaults to the Git context, which ignores the
+          # checkout above. Be explicit.
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Publish image digest to the run summary
+        run: |
+          echo "### Published image" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "digest: ${{ steps.docker_build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "tags:" >> "$GITHUB_STEP_SUMMARY"
+          echo "${{ steps.meta.outputs.tags }}" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
