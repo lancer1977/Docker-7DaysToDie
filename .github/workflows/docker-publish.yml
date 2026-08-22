@@ -1,7 +1,7 @@
 name: Release - Docker Image CI
 
-# This workflow had never run once before this change, for two compounding
-# reasons:
+# Historically, this workflow had never run before the publish repair, for two
+# compounding reasons:
 #   1. It only triggered on `release: published`, and this fork has no
 #      published release (only an untagged draft). The `branches:` key under
 #      `release:` was also inert — release events are not branch-filtered.
@@ -38,14 +38,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # GHCR with the Actions-builtin GITHUB_TOKEN — no secret needs to be
-      # provisioned in this repository.
+      # GHCR with the Actions-builtin token — no external registry secret is
+      # needed in this repository.
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ github.token }}
 
       - name: Docker meta
         id: meta
